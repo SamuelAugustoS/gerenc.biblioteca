@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Biblioteca</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" background-color="#ffffff">
+        <h1>Gerenciamento de Biblioteca</h1>
+        
+        <div class="section">
+            <h2>Adicionar Livro</h2>
+            <input type="text" id="titulo" placeholder="Título" required>
+            <input type="text" id="autor" placeholder="Autor" required>
+            <input type="number" id="anoPublicacao" placeholder="Ano de Publicação" required>
+            <input type="text" id="genero" placeholder="Gênero" required>
+            <button onclick="adicionarLivro()">Adicionar</button>
+        </div>
+
+        <div class="section">
+            <h2>Livros Cadastrados</h2>
+            <ul id="listaLivros"></ul>
+        </div>
+
+        <div class="section">
+            <h2>Remover Livro</h2>
+            <input type="text" id="tituloRemover" placeholder="Título do Livro a Remover">
+            <button onclick="removerLivro()">Remover</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
