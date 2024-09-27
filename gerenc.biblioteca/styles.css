@@ -2,9 +2,11 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('/imagem/background.jpg'); /* Coloque o nome da sua imagem aqui */
+    background-image: url('imagem/background.jpg'); /* Ajuste o caminho se necessário */
     background-size: cover; /* Faz a imagem cobrir toda a tela */
     background-position: center; /* Centraliza a imagem */
+    height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+    overflow: hidden; /* Evita barras de rolagem */
 }
 
 .container {
@@ -13,7 +15,7 @@ body {
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.9); /* Fundo branco com leve transparência */
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgb(255, 255, 255);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra com cor */
 }
 
 h1 {
@@ -28,7 +30,7 @@ h1 {
 input {
     margin: 10px 0;
     padding: 10px;
-    width: calc(100% - 12px);
+    width: calc(100% - 22px); /* Ajuste para incluir padding e border */
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
