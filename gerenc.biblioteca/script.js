@@ -9,11 +9,21 @@ class Livro {
 
 class Biblioteca {
     constructor() {
-        this.livros = [];
+        this.livros = this.carregarLivros();
+    }
+
+    carregarLivros() {
+        const livrosSalvos = localStorage.getItem('livros');
+        return livrosSalvos ? JSON.parse(livrosSalvos) : [];
+    }
+
+    salvarLivros() {
+        localStorage.setItem('livros', JSON.stringify(this.livros));
     }
 
     adicionarLivro(livro) {
         this.livros.push(livro);
+        this.salvarLivros();
         this.exibirLivros();
     }
 
@@ -21,6 +31,7 @@ class Biblioteca {
         const index = this.livros.findIndex(livro => livro.titulo.toLowerCase() === titulo.toLowerCase());
         if (index !== -1) {
             this.livros.splice(index, 1);
+            this.salvarLivros();
             this.exibirLivros();
         } else {
             alert(`Livro "${titulo}" não encontrado.`);
@@ -28,23 +39,24 @@ class Biblioteca {
     }
 
     exibirLivros() {
-        const listaLivros = document.getElementById('listaLivros');
-        listaLivros.innerHTML = '';
+        const listaLivrosModal = document.getElementById('listaLivrosModal');
+        listaLivrosModal.innerHTML = ''; // Limpa a lista antes de exibir
 
         if (this.livros.length === 0) {
-            listaLivros.innerHTML = '<li>Nenhum livro cadastrado.</li>';
+            listaLivrosModal.innerHTML = '<li>Nenhum livro cadastrado.</li>';
             return;
         }
 
         this.livros.forEach(livro => {
-            const li = document.createElement('li');
-            li.textContent = `Título: ${livro.titulo}, Autor: ${livro.autor}, Ano: ${livro.anoPublicacao}, Gênero: ${livro.genero}`;
-            listaLivros.appendChild(li);
+            const liModal = document.createElement('li');
+            liModal.textContent = `Título: ${livro.titulo}, Autor: ${livro.autor}, Ano: ${livro.anoPublicacao}, Gênero: ${livro.genero}`;
+            listaLivrosModal.appendChild(liModal);
         });
     }
 }
 
 const minhaBiblioteca = new Biblioteca();
+minhaBiblioteca.exibirLivros(); // Exibir livros ao carregar a página
 
 function adicionarLivro() {
     const titulo = document.getElementById('titulo').value;
@@ -74,4 +86,14 @@ function removerLivro() {
     } else {
         alert('Digite o título do livro a ser removido.');
     }
+}
+
+// Funções do Modal
+function abrirModal() {
+    minhaBiblioteca.exibirLivros(); // Atualiza a lista ao abrir o modal
+    document.getElementById('modal').style.display = 'block';
+}
+
+function fecharModal() {
+    document.getElementById('modal').style.display = 'none';
 }
